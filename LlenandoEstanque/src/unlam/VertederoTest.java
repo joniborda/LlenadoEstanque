@@ -26,8 +26,8 @@ public class VertederoTest {
 	}
 	
 	@Test
-	public void DosEstanqueHastaPrimerCañeria() {
-		System.out.println("DosEstanqueHastaPrimerCañeria");
+	public void DosEstanqueHastaPrimerCaneria() {
+		System.out.println("DosEstanqueHastaPrimerCaneria");
 		// superficie, profundidad, profundidad compuerta
 		Vertedero vertedero = new Vertedero(4, 6, 2);
 		Vertedero vertedero2 = new Vertedero(5, 7);

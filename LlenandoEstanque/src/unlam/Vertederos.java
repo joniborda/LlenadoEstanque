@@ -31,7 +31,7 @@ public class Vertederos {
 			vertedero = this.vertederos.get(i);
 			if (i != 0) {
 				vertederoAnterior = this.vertederos.get(i-1);
-				if (vertederoAnterior.cargadoHastaCañeria()) {
+				if (vertederoAnterior.cargadoHastaCaneria()) {
 					llenado = vertedero.llenar(this.volumenALlenar);
 				}
 			} else {
