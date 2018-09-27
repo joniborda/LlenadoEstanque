@@ -2,6 +2,7 @@ package unlam;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,46 +35,46 @@ public class Vertederos {
 		int mayorAlturaLlenadaEnIteracion = 0;
 		Set<Integer> vertederosQuePuedenCargar = new TreeSet<Integer>();
 
-		for (int i = 0; i < this.vertederos.size(); i++) {
-			vertedero = this.vertederos.get(i);
-			if (vertedero.litrosLlenados < vertedero.superficie * vertedero.nivelCañeria) {
-				vertederosQuePuedenCargar.add(i);
-				
-				if (i == 0 || this.vertederos.get(i - 1).litrosLlenados >= this.vertederos.get(i - 1).superficie
-						* this.vertederos.get(i - 1).nivelCañeria) {
-					
-					mayorAlturaLlenadaEnIteracion = vertedero.profundidadCañeria;
-				}
-				break;
-			} else if (i + 1 < this.vertederos.size()) {
-				if (this.vertederos.get(i + 1).litrosLlenados < this.vertederos.get(i + 1).superficie
-						* this.vertederos.get(i).profundidadCañeria) {
-					
-					mayorAlturaLlenadaEnIteracion = this.vertederos.get(i).profundidadCañeria;
-					vertederosQuePuedenCargar.add(i + 1);
-					break;
-				}
-				vertederosQuePuedenCargar.add(i);
-			}
-		}
+		while (this.volumenALlenar > 0) {
 
-		for (int i = 0; i < this.vertederos.size(); i++) {
-			vertedero = this.vertederos.get(i);
-			if (i != 0) {
-				vertederoAnterior = this.vertederos.get(i - 1);
-				if (vertederoAnterior.cargadoHastaCañeria()) {
-					llenado = vertedero.llenar(this.volumenALlenar);
+			for (int i = 0; i < this.vertederos.size(); i++) {
+				vertedero = this.vertederos.get(i);
+				if (vertedero.litrosLlenados < vertedero.superficie * vertedero.nivelCañeria) {
+					vertederosQuePuedenCargar.add(i);
+
+					if (i == 0 || this.vertederos.get(i - 1).litrosLlenados >= this.vertederos.get(i - 1).superficie
+							* this.vertederos.get(i - 1).nivelCañeria) {
+
+						mayorAlturaLlenadaEnIteracion = vertedero.profundidadCaneria;
+					}
+					break;
+				} else if (i + 1 < this.vertederos.size()) {
+					if (this.vertederos.get(i + 1).litrosLlenados < this.vertederos.get(i + 1).superficie
+							* this.vertederos.get(i).profundidadCaneria) {
+
+						mayorAlturaLlenadaEnIteracion = this.vertederos.get(i).profundidadCaneria;
+						vertederosQuePuedenCargar.add(i + 1);
+						break;
+					}
+					vertederosQuePuedenCargar.add(i);
 				}
-			} else {
-				System.out.println(vertedero);
-				llenado = vertedero.llenar(this.volumenALlenar);
 			}
-			if (llenado != 0) {
-				this.volumenALlenar -= llenado;
-				this.vertedoresUsados++;
+			for (Iterator iterator = vertederosQuePuedenCargar.iterator(); iterator.hasNext();) {
+				Integer i = (Integer) iterator.next();
+				// falta ver que al llenar no llene todo en el primero sino que se reparta a la altura que puede
+				this.volumenALlenar -= this.vertederos.get(i).llenar(this.volumenALlenar);
 			}
-			System.out.println(vertedero);
 		}
+		/*
+		 * for (int i = 0; i < this.vertederos.size(); i++) { vertedero =
+		 * this.vertederos.get(i); if (i != 0) { vertederoAnterior =
+		 * this.vertederos.get(i - 1); if (vertederoAnterior.cargadoHastaCañeria()) {
+		 * llenado = vertedero.llenar(this.volumenALlenar); } } else {
+		 * System.out.println(vertedero); llenado =
+		 * vertedero.llenar(this.volumenALlenar); } if (llenado != 0) {
+		 * this.volumenALlenar -= llenado; this.vertedoresUsados++; }
+		 * System.out.println(vertedero); }
+		 */
 		return null;
 	}
 
