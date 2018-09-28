@@ -1,7 +1,6 @@
 package unlam;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -39,11 +38,11 @@ public class Vertederos {
 
 			for (int i = 0; i < this.vertederos.size(); i++) {
 				vertedero = this.vertederos.get(i);
-				if (vertedero.litrosLlenados < vertedero.superficie * vertedero.nivelCañeria) {
+				if (vertedero.litrosLlenados < vertedero.superficie * vertedero.nivelCaneria) {
 					vertederosQuePuedenCargar.add(i);
 
 					if (i == 0 || this.vertederos.get(i - 1).litrosLlenados >= this.vertederos.get(i - 1).superficie
-							* this.vertederos.get(i - 1).nivelCañeria) {
+							* this.vertederos.get(i - 1).nivelCaneria) {
 
 						mayorAlturaLlenadaEnIteracion = vertedero.profundidadCaneria;
 					}

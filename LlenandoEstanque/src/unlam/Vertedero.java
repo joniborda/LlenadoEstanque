@@ -6,7 +6,7 @@ public class Vertedero {
 
 	int superficie;
 	int profundidad;
-	int nivelCañeria;
+	int nivelCaneria;
 	int profundidadCaneria;
 	int litrosLlenados;
 	boolean ultimo = false;
@@ -14,14 +14,14 @@ public class Vertedero {
 	public Vertedero(int superficie, int profundidad, int profundidadCaneria) {
 		this.superficie = superficie;
 		this.profundidad = profundidad;
-		this.nivelCañeria = profundidad - profundidadCaneria;
+		this.nivelCaneria = profundidad - profundidadCaneria;
 		this.profundidadCaneria = profundidadCaneria;
 	}
 
 	public Vertedero(int superficie, int profundidad) {
 		this.superficie = superficie;
 		this.profundidad = profundidad;
-		this.nivelCañeria = profundidad;
+		this.nivelCaneria = profundidad;
 		this.ultimo = true;
 	}
 
@@ -48,7 +48,7 @@ public class Vertedero {
 	}
 
 	public boolean cargadoHastaCañeria() {
-		return this.litrosLlenados >= this.superficie * this.nivelCañeria;
+		return this.litrosLlenados >= this.superficie * this.nivelCaneria;
 	}
 
 	public String toString() {
@@ -57,8 +57,8 @@ public class Vertedero {
 	}
 
 	public int puedeLlenar(ArrayList<Vertedero> vertederos, int position) {
-		if (vertederos.get(position).litrosLlenados < this.superficie * this.nivelCañeria) {
-			return this.superficie * this.nivelCañeria - this.litrosLlenados;
+		if (vertederos.get(position).litrosLlenados < this.superficie * this.nivelCaneria) {
+			return this.superficie * this.nivelCaneria - this.litrosLlenados;
 		}
 
 		return 0;
