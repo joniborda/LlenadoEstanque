@@ -18,7 +18,7 @@ public class Archivo {
 		vertederos.add(new Vertedero(sc.nextInt(), sc.nextInt()));
 
 		//seteo al primer Vertedero el volumen total
-		vertederos.volumenALlenar = sc.nextInt();
+		vertederos.setVolumenALlenar(sc.nextInt());
 		
 		sc.close();
 		return vertederos;

@@ -14,4 +14,13 @@ public class VertederoTest {
 		
 		Archivo.escribirArchivo("src/archivos/salida/procesada/caso1.out", vertederos);
 	}
+	
+	@Test
+	public void DosEstanque() throws FileNotFoundException {
+		Vertederos vertederos = Archivo.leerArchivo("src/archivos/entrada/caso2.in");
+		vertederos.llenar();
+		
+		
+		Archivo.escribirArchivo("src/archivos/salida/procesada/caso2.out", vertederos);
+	}
 }

@@ -1,15 +1,12 @@
 package unlam;
 
-import java.util.ArrayList;
-
 public class Vertedero {
 
-	float superficie;
-	float profundidad;
-	float nivelCaneria;
-	float profundidadCaneria;
-	float litrosLlenados;
-	boolean ultimo = false;
+	private float superficie;
+	private float profundidad;
+	private float nivelCaneria;
+	private float profundidadCaneria = 0;
+	private float litrosLlenados;
 
 	public Vertedero(float superficie, float profundidad, float profundidadCaneria) {
 		this.superficie = superficie;
@@ -22,40 +19,68 @@ public class Vertedero {
 		this.superficie = superficie;
 		this.profundidad = profundidad;
 		this.nivelCaneria = profundidad;
-		this.ultimo = true;
 	}
 
-	public float llenar(float altura) {
-		float ret = altura * this.superficie - this.litrosLlenados;
-		this.litrosLlenados = altura * this.superficie;
-		System.out.print(" altura " + altura);
-		System.out.print(" litros " + this.litrosLlenados + "ret " + ret + "\n");
-		return ret;
+	public float getSuperficie() {
+		return this.superficie;
 	}
 
-	public float litrosLlenados() {
+	/**
+	 * Nivel donde se encuentra la caneria medido desde el abajo
+	 * 
+	 * @return Nivel
+	 */
+	public float getNivelCaneria() {
+		return this.nivelCaneria;
+	}
+
+	/**
+	 * Nivel donde se encuentra la caneria medido desde el arriba
+	 * 
+	 * @return Nivel
+	 */
+	public float getProfundidadCaneria() {
+		return this.profundidadCaneria;
+	}
+
+	public float getLitrosLlenados() {
 		return this.litrosLlenados;
 	}
 
-	public float nivel() {
+	/**
+	 * Nivel de agua medido desde el fondo
+	 * 
+	 * @return Nivel
+	 */
+	public float nivelAgua() {
 		return this.litrosLlenados / this.superficie;
 	}
 
-	public boolean cargadoHastaCañeria() {
-		return this.litrosLlenados >= this.superficie * this.nivelCaneria;
+	/**
+	 * Nivel de agua medido desde arriba
+	 * 
+	 * @return Nivel
+	 */
+	public float nivelAguaArriba() {
+		return this.profundidad - (this.litrosLlenados / this.superficie);
+	}
+
+	public float llenar(float altura, float maximoALlenar) {
+		float ret = (this.profundidad - altura) * this.superficie - this.litrosLlenados;
+		if (ret > maximoALlenar) {
+			ret = maximoALlenar;
+		}
+		this.litrosLlenados = this.litrosLlenados + ret;
+		System.out.print(" altura " + altura + " litrostotales " + this.litrosLlenados + " ret " + ret + "\n");
+		return ret;
+	}
+	
+	public float rebalsar(float altura) {
+		return altura * this.superficie;
 	}
 
 	public String toString() {
-		return "superficie " + this.superficie + " profundidad " + this.profundidad + " llenados "
-				+ this.litrosLlenados;
+		return "superficie " + (int) this.superficie + " profundidad " + (int) this.profundidad + " llenados "
+				+ (int) this.litrosLlenados;
 	}
-
-	public float puedeLlenar(ArrayList<Vertedero> vertederos, int position) {
-		if (vertederos.get(position).litrosLlenados < this.superficie * this.nivelCaneria) {
-			return this.superficie * this.nivelCaneria - this.litrosLlenados;
-		}
-
-		return 0;
-	}
-
 }
